@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starterapp/pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,17 +13,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      drawer: _drawer(),
+      drawer: _drawer(context),
       body: Center(child: Text('This is home page')),
     );
   }
 }
 
-Widget _drawer() {
+Widget _drawer(BuildContext context) {
   return Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
-      children: const <Widget>[
+      children: <Widget>[
         DrawerHeader(
           decoration: BoxDecoration(
             color: Colors.blue,
@@ -38,10 +39,21 @@ Widget _drawer() {
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('Login'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.account_circle),
           title: Text('Register'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, '/sign_up');
+          },
         ),
         ListTile(
           leading: Icon(Icons.settings),

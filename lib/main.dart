@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starterapp/pages/home_page.dart';
+import 'package:starterapp/pages/login_page.dart';
+import 'package:starterapp/pages/register_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +13,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      // home: HomePage(), // remove when using routes
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/sign_up': (context) => RegisterPage(),
+      },
     );
   }
 }

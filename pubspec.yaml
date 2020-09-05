@@ -36,7 +36,8 @@ dependencies:
   barcode_scan:
   intl: 
   font_awesome_flutter:
-  google_sign_in: 
+  google_sign_in:
+  email_validator: 
 
 
 dev_dependencies:
