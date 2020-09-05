@@ -36,12 +36,12 @@ Widget _drawer() {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.message),
-          title: Text('Messages'),
+          leading: Icon(Icons.exit_to_app),
+          title: Text('Login'),
         ),
         ListTile(
           leading: Icon(Icons.account_circle),
-          title: Text('Profile'),
+          title: Text('Register'),
         ),
         ListTile(
           leading: Icon(Icons.settings),
