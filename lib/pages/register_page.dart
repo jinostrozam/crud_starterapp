@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:starterapp/pages/login_page.dart';
 
@@ -8,6 +9,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _registerFormKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -90,12 +92,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     textColor: Colors.white,
                     onPressed: () {
                       if (_registerFormKey.currentState.validate()) {
-                        print('Validation Ok! Submit!');
-                        print('name: ${_nameController.text}');
-                        print('email: ${_emailController.text}');
-                        print('password: ${_passwordController.text}');
-                        print(
-                            'confirmPassword: ${_confirmPasswordController.text}');
+                        _register();
+                        // print('Validation Ok! Submit!');
+                        // print('name: ${_nameController.text}');
+                        // print('email: ${_emailController.text}');
+                        // print('password: ${_passwordController.text}');
+                        // print(
+                        //     'confirmPassword: ${_confirmPasswordController.text}');
                       }
                     },
                   ),
@@ -116,5 +119,17 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void _register() async {
+    try {
+      final User user = (await _auth.createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text))
+          .user;
+
+      Navigator.pushNamed(context, '/');
+    } catch (e) {
+      print('Ocurrio un error al registrar. $e');
+    }
   }
 }
