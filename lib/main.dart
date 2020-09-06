@@ -19,22 +19,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isAuthenticated = false;
+  // bool isAuthenticated = false;
   String testProviderText = 'Probando provider';
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
 
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      print('authStateChanged Called');
+  //   FirebaseAuth.instance.authStateChanges().listen((user) {
+  //     print('authStateChanged Called');
 
-      setState(() {
-        isAuthenticated = user != null;
-      });
-    });
-  }
+  //     setState(() {
+  //       isAuthenticated = user != null;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         Provider<String>(create: (context) => testProviderText),
         // Provider<bool>(create: (context) => isAuthenticated),
-        ChangeNotifierProvider<GlobalState>(create: (context) => GlobalState())
+        // ChangeNotifierProvider<GlobalState>(create: (context) => GlobalState())
+        StreamProvider<User>(
+            create: (context) => FirebaseAuth.instance.authStateChanges())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

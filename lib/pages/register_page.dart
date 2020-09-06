@@ -129,8 +129,8 @@ class _RegisterPageState extends State<RegisterPage> {
               email: _emailController.text, password: _passwordController.text))
           .user;
 
-      Provider.of<GlobalState>(context, listen: false)
-          .updateIsAuthenticated(true);
+      // Provider.of<GlobalState>(context, listen: false)
+      //     .updateIsAuthenticated(true);
 
       Navigator.pushNamed(context, '/');
     } catch (e) {

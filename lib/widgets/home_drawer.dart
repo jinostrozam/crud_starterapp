@@ -12,8 +12,10 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final bool isAuthenticated = Provider.of<bool>(context);
-    final bool isAuthenticated =
-        Provider.of<GlobalState>(context).isAuthenticated;
+    // final bool isAuthenticated =
+    //     Provider.of<GlobalState>(context).isAuthenticated;
+    final user = Provider.of<User>(context);
+    final bool isAuthenticated = user != null;
 
     return Drawer(
       child: ListView(
@@ -88,8 +90,8 @@ class HomeDrawer extends StatelessWidget {
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
 
-                Provider.of<GlobalState>(context, listen: false)
-                    .updateIsAuthenticated(false);
+                // Provider.of<GlobalState>(context, listen: false)
+                //     .updateIsAuthenticated(false);
 
                 Navigator.pushNamed(context, '/');
               },
