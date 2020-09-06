@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:starterapp/global_state.dart';
 import 'package:starterapp/widgets/home_drawer.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.isAuthenticated}) : super(key: key);
-  final bool isAuthenticated;
+  // HomePage({Key key, this.isAuthenticated}) : super(key: key);
+  // final bool isAuthenticated;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -12,13 +14,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    // final bool isAuthenticated = Provider.of<bool>(context);
+    final bool isAuthenticated =
+        Provider.of<GlobalState>(context).isAuthenticated;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      drawer: HomeDrawer(isAuthenticated: widget.isAuthenticated),
+      // drawer: HomeDrawer(isAuthenticated: widget.isAuthenticated),
+      drawer: HomeDrawer(),
       body: Center(
-        child: widget.isAuthenticated
+        // child: widget.isAuthenticated
+        child: isAuthenticated
             ? Text('User logged successfully')
             : Text('No user logged in'),
       ),

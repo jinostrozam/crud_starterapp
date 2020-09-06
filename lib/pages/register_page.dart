@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:starterapp/global_state.dart';
 import 'package:starterapp/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -126,6 +128,9 @@ class _RegisterPageState extends State<RegisterPage> {
       final User user = (await _auth.createUserWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text))
           .user;
+
+      Provider.of<GlobalState>(context, listen: false)
+          .updateIsAuthenticated(true);
 
       Navigator.pushNamed(context, '/');
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:starterapp/global_state.dart';
 import 'package:starterapp/pages/login_page.dart';
 import 'package:starterapp/pages/posts/my_posts_page.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,10 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final bool isAuthenticated = Provider.of<bool>(context);
+    final bool isAuthenticated =
+        Provider.of<GlobalState>(context).isAuthenticated;
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -25,17 +30,24 @@ class HomeDrawer extends StatelessWidget {
             //     fontSize: 24,
             //   ),
             // ),
-            child: Consumer<String>(
-              builder: (context, value, child) {
-                return Text(
-                  "$value",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                );
-              },
+            child: Text(
+              '${Provider.of<String>(context)}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
             ),
+            // child: Consumer<String>(
+            //   builder: (context, value, child) {
+            //     return Text(
+            //       "$value",
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 24,
+            //       ),
+            //     );
+            //   },
+            // ),
           ),
           if (!isAuthenticated) ...[
             ListTile(

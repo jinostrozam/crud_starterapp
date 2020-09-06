@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:starterapp/global_state.dart';
 import 'package:starterapp/pages/home_page.dart';
 import 'package:starterapp/pages/login_page.dart';
 import 'package:starterapp/pages/register_page.dart';
@@ -37,8 +38,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      create: (context) => testProviderText,
+    return MultiProvider(
+      providers: [
+        Provider<String>(create: (context) => testProviderText),
+        // Provider<bool>(create: (context) => isAuthenticated),
+        ChangeNotifierProvider<GlobalState>(create: (context) => GlobalState())
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -48,7 +53,8 @@ class _MyAppState extends State<MyApp> {
         // home: HomePage(), // remove when using routes
         initialRoute: '/',
         routes: {
-          '/': (context) => HomePage(isAuthenticated: isAuthenticated),
+          // '/': (context) => HomePage(isAuthenticated: isAuthenticated),
+          '/': (context) => HomePage(),
           '/sign_up': (context) => RegisterPage(),
           '/login': (context) => LoginPage(),
         },
