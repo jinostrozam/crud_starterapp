@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:starterapp/pages/login_page.dart';
 import 'package:starterapp/pages/posts/my_posts_page.dart';
+import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
   HomeDrawer({Key key, this.isAuthenticated}) : super(key: key);
@@ -17,12 +18,23 @@ class HomeDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text(
-              'Drawer Header',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
+            // child: Text(
+            //   '${Provider.of<String>(context)}',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 24,
+            //   ),
+            // ),
+            child: Consumer<String>(
+              builder: (context, value, child) {
+                return Text(
+                  "$value",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                );
+              },
             ),
           ),
           if (!isAuthenticated) ...[

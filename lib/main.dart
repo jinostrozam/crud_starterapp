@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:starterapp/pages/home_page.dart';
 import 'package:starterapp/pages/login_page.dart';
 import 'package:starterapp/pages/register_page.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isAuthenticated = false;
+  String testProviderText = 'Probando provider';
 
   @override
   void initState() {
@@ -35,19 +37,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider<String>(
+      create: (context) => testProviderText,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        // home: HomePage(), // remove when using routes
+        initialRoute: '/',
+        routes: {
+          '/': (context) => HomePage(isAuthenticated: isAuthenticated),
+          '/sign_up': (context) => RegisterPage(),
+          '/login': (context) => LoginPage(),
+        },
       ),
-      // home: HomePage(), // remove when using routes
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(isAuthenticated: isAuthenticated),
-        '/sign_up': (context) => RegisterPage(),
-        '/login': (context) => LoginPage(),
-      },
     );
   }
 }
