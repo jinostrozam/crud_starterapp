@@ -88,6 +88,9 @@ class HomeDrawer extends StatelessWidget {
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
 
+                Provider.of<GlobalState>(context, listen: false)
+                    .updateIsAuthenticated(false);
+
                 Navigator.pushNamed(context, '/');
               },
             ),
