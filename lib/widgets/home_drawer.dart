@@ -11,9 +11,6 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final bool isAuthenticated = Provider.of<bool>(context);
-    // final bool isAuthenticated =
-    //     Provider.of<GlobalState>(context).isAuthenticated;
     final user = Provider.of<User>(context);
     final bool isAuthenticated = user != null;
 
@@ -25,13 +22,6 @@ class HomeDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            // child: Text(
-            //   '${Provider.of<String>(context)}',
-            //   style: TextStyle(
-            //     color: Colors.white,
-            //     fontSize: 24,
-            //   ),
-            // ),
             child: Text(
               '${Provider.of<String>(context)}',
               style: TextStyle(
@@ -39,17 +29,6 @@ class HomeDrawer extends StatelessWidget {
                 fontSize: 24,
               ),
             ),
-            // child: Consumer<String>(
-            //   builder: (context, value, child) {
-            //     return Text(
-            //       "$value",
-            //       style: TextStyle(
-            //         color: Colors.white,
-            //         fontSize: 24,
-            //       ),
-            //     );
-            //   },
-            // ),
           ),
           if (!isAuthenticated) ...[
             ListTile(
@@ -89,9 +68,6 @@ class HomeDrawer extends StatelessWidget {
               title: Text('Logout'),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
-
-                // Provider.of<GlobalState>(context, listen: false)
-                //     .updateIsAuthenticated(false);
 
                 Navigator.pushNamed(context, '/');
               },

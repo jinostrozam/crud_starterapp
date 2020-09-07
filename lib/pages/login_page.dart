@@ -69,12 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (_registerFormKey.currentState.validate()) {
                         _signIn();
-                        // print('Validation Ok! Submit!');
-                        // print('name: ${_nameController.text}');
-                        // print('email: ${_emailController.text}');
-                        // print('password: ${_passwordController.text}');
-                        // print(
-                        //     'confirmPassword: ${_confirmPasswordController.text}');
                       }
                     },
                   ),
@@ -102,9 +96,6 @@ class _LoginPageState extends State<LoginPage> {
       final User user = (await _auth.signInWithEmailAndPassword(
               email: _emailController.text, password: _passwordController.text))
           .user;
-
-      // Provider.of<GlobalState>(context, listen: false)
-      //     .updateIsAuthenticated(true);
 
       Navigator.pushNamed(context, '/');
     } catch (e) {
